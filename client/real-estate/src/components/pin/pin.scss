@@ -1,0 +1,30 @@
+
+    .popupContainer{
+        display: flex;
+        gap:20px;
+
+        img{
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .textContainer{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap:3px;
+            .bed{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                img{
+                    height: 16px;
+                    width: 16px;
+                }
+            }
+            
+        }
+    }

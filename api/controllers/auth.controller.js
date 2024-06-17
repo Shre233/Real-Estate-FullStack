@@ -52,19 +52,29 @@ export const login = async (req, res) => {
     // generate cookie token and send to the user
     //res.setHeader("Set-Cookie", "test=" + "myValue").json("success");
 
-    const token = jwt.sign({
-      id:user.id
-    })
-
     const age = 1000 * 60 * 60 * 24 * 7;
+
+    // here the token is the encrypted user id and we can use cookie token
+    // to identify the user.
+    const token = jwt.sign(
+      {
+        id: user.id,
+        isAdmin: false,
+      },
+      process.env.JWT_SECURITY_KEY,
+      { expiresIn: age }
+    );
+
+    const { password: userPassword, ...userInfo } = user;
+
     res
-      .cookie("test2", "myValue2", {
+      .cookie("token", token, {
         httpOnly: true, //Client side JS cannot access cookie
         //secure: true, // for https mode in deployment
         maxAge: age,
       })
       .status(200)
-      .json({ message: "Login Successful" });
+      .json(userInfo);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to Login" });
@@ -73,4 +83,5 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   //db operations
+  res.clearCookie("token").status(200).json({ message: "Logout Successful!!" });
 };
