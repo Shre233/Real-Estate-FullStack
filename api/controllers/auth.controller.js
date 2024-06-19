@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma.js";
+
+
 export const register = async (req, res) => {
   //db operations
   // console.log(req.body);
@@ -29,6 +31,9 @@ export const register = async (req, res) => {
     res.status(501).json({ message: "Failed to Create User" });
   }
 };
+
+
+
 
 export const login = async (req, res) => {
   //db operations
