@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { Marker, Popup } from "react-leaflet";
 export default function Pin({ item }) {
   return (
-    <div className="pin">
+    <div onClick={()=>{console.log(item);}} className="pin">
       <Marker  position={[item.latitude, item.longitude]}>
         <Popup>
           <div className="popupContainer">
-            <img src={item.img} alt="" />
+            <img src={item.img || item.images[0]} alt="" />
             <div className="textContainer">
               <Link to={`/${item.id}`}>{item.title}</Link>
               <div className="bed">

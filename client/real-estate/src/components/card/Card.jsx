@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./card.scss";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 export default function Card({ item }) {
+
   return (
     <div className="card">
       <Link to={`/${item.id}`} className="imageContainer">
-        <img src={item.img} alt="" />
+        <img src={item.img || item.images[0]} alt="" />
       </Link>
       <div className="textContainer">
         <h2 className="title">
@@ -28,7 +30,7 @@ export default function Card({ item }) {
             </div>
           </div>
           <div className="icons">
-            <div className="icon">
+            <div className="icon" >
               <img src="/save.png" alt="" />
             </div>
             <div className="icon">
